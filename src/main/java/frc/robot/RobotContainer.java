@@ -16,9 +16,11 @@ import edu.wpi.first.wpilibj.SPI;
 
 
 public class RobotContainer {
-  SwerveDrive<REVSwerveModule> swervedrive;
-  SwerveDriveCommand swervedrivecommand;
-  XboxController xbox = new XboxController(0);
+  protected SwerveDrive<REVSwerveModule> swervedrive;
+  protected SwerveDriveCommand swervedrivecommand;
+  protected XboxController xbox = new XboxController(0);
+  protected final AHRS m_gyro = new AHRS(SPI.Port.kMXP);
+
 
   public RobotContainer() {
     REVSwerveModule m_frontLeft = new REVSwerveModule(
@@ -45,7 +47,6 @@ public class RobotContainer {
       DriveConstants.kBackRightChassisAngularOffset,
       DriveConstants.rearright_translation);
 
-    private final AHRS m_gyro = new AHRS(SPI.Port.kMXP);
 
     swervedrive = new SwerveDrive<>(m_gyro, m_frontLeft, m_frontRight, m_rearLeft, m_rearRight);
     swervedrivecommand = new SwerveDriveCommand(swervedrive, xbox, DriveConstants.DriveAugParams);

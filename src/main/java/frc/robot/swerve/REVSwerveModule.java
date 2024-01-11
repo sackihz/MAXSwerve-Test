@@ -123,9 +123,8 @@ public class REVSwerveModule extends SwerveModule{
 
     @Override
     public void stop() {
-        // TODO Auto-generated method stub
-        // this - set the motors to stop
-        
+        m_drivingSparkMax.stopMotor();
+        m_turningSparkMax.stopMotor();        
     }
 
     @Override

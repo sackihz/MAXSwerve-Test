@@ -86,6 +86,8 @@ public class SwerveDriveCommand extends CommandBase {
 
       this.swervedrive.applyTarget(target); 
       this.prev_target = target;
+
+      // this - do feild relative!!!
     }
 
     this.pose_integ.iterate(this.prev_target, 0.02);
