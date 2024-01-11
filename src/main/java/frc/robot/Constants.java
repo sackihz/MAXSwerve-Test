@@ -10,6 +10,7 @@ import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.math.util.Units;
+import frc.robot.swerve.SwerveDrive.AugmentationParams;
 
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide
@@ -30,8 +31,8 @@ public final class Constants {
     public static final double kMaxSpeedMetersPerSecond = 4.8;
     public static final double kMaxAngularSpeed = Math.PI; // radians per second
 
-    public static final double kDirectionSlewRate = 1.2; // radians per second
-    public static final double kMagnitudeSlewRate = 0.9; // percent per second (1 = 100%)
+    public static final double MaxRotationalAcceleration = 2 * Math.PI; // radians per second
+    public static final double MaxLinearAcceleration = 9.8; // percent per second (1 = 100%)
     public static final double kRotationalSlewRate = 2.0; // percent per second (1 = 100%)
 
     // Chassis configuration
@@ -39,11 +40,19 @@ public final class Constants {
     // Distance between centers of right and left wheels on robot
     public static final double kWheelBase = Units.inchesToMeters(18.5);
     // Distance between front and back wheels on robot
+
+    public static final Translation2d 
+      frontleft_translation = new Translation2d(kWheelBase / 2, kTrackWidth / 2),
+      frontright_translation = new Translation2d(kWheelBase / 2, -kTrackWidth / 2),
+      rearleft_translation = new  Translation2d(-kWheelBase / 2, kTrackWidth / 2),
+      rearright_translation = new  Translation2d(-kWheelBase / 2, -kTrackWidth / 2);
+
+
     public static final SwerveDriveKinematics kDriveKinematics = new SwerveDriveKinematics(
-        new Translation2d(kWheelBase / 2, kTrackWidth / 2),
-        new Translation2d(kWheelBase / 2, -kTrackWidth / 2),
-        new Translation2d(-kWheelBase / 2, kTrackWidth / 2),
-        new Translation2d(-kWheelBase / 2, -kTrackWidth / 2));
+        frontleft_translation,
+        frontright_translation,
+        rearleft_translation,
+        rearright_translation);
 
     // Angular offsets of the modules relative to the chassis in radians
     public static final double kFrontLeftChassisAngularOffset = -Math.PI / 2;
@@ -65,6 +74,8 @@ public final class Constants {
     public static final int kRearRightTurningCanId = 7;
 
     public static final boolean kGyroReversed = false;
+
+    public static final AugmentationParams DriveAugParams = new AugmentationParams(true, kMaxSpeedMetersPerSecond);
   }
 
   public static final class ModuleConstants {
@@ -122,7 +133,7 @@ public final class Constants {
 
   public static final class OIConstants {
     public static final int kDriverControllerPort = 0;
-    public static final double kDriveDeadband = 0.10;
+    public static final double kDriveDeadband = 0.05;
   }
 
   public static final class AutoConstants {

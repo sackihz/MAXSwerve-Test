@@ -1,6 +1,7 @@
 package frc.robot.swerve;
 
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 
@@ -30,7 +31,8 @@ public class REVSwerveModule extends SwerveModule{
     private double m_chassisAngularOffset = 0;
     private SwerveModuleStates m_desiredState = new SwerveModuleStates();
 
-    public REVSwerveModule(int drivingCANId, int turningCANId, double chassisAngularOffset) {
+    public REVSwerveModule(int drivingCANId, int turningCANId, double chassisAngularOffset, Translation2d module_location) {
+        super(module_location);
 
         m_drivingSparkMax = new CANSparkMax(drivingCANId, MotorType.kBrushless);
         m_turningSparkMax = new CANSparkMax(turningCANId, MotorType.kBrushless);
